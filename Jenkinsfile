@@ -117,10 +117,10 @@ pipeline {
                 sh '''
                     sleep 30
                     # ELB
-                    #STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://$ELB_ENDPOINT)
+                    STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://$ELB_ENDPOINT)
 
                     # Service
-                    STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://${APP_NAME})
+                    ๒STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://${APP_NAME})
                     if test $STATUSCODE -ne 200; then echo ERROR:$STATUSCODE && exit 1; else echo SUCCESS; fi;
                 '''
             }
