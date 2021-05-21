@@ -80,6 +80,16 @@ pipeline {
             }
         }
 
+        stage('Link Variables to Deployment') {
+            steps {
+                echo 'Link Variables to Deployment'
+                sh '''
+                    kubectl set env --from=secret/${APP_NAME} deployment/${APP_NAME} -n ${DEV_PROJECT}
+                '''
+
+            }
+        }
+
         stage('Expose Service to Dev ENV') {
             steps {
                 echo 'Expose Service to Dev ENV'
