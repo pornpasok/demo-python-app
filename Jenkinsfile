@@ -36,6 +36,19 @@ pipeline {
             }
         }
 
+        stage('Source Code Scan SonarQube') {
+            steps {
+                echo 'Source Code Scan SonarQube'
+                sh '''
+                    /sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
+                    -Dsonar.projectKey=demo-python-app \
+                    -Dsonar.sources=. \
+                    -Dsonar.host.url=http://13.229.91.61:9000 \
+                    -Dsonar.login=ee6ccb608ae1c7c82c881c851da52844b1545866
+                '''
+            }
+        }
+
         stage('Build Docker Images') {
             steps {
                 echo 'Build Docker Images'
