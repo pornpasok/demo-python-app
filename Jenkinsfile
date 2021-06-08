@@ -39,14 +39,16 @@ pipeline {
 
         stage('Source Code Scan SonarQube') {
             steps {
-                echo 'Source Code Scan SonarQube'
-                sh '''
-                    /sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
-                    -Dsonar.projectKey="${APP_NAME}" \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=https://sq.7-11.io \
-                    -Dsonar.login="credentialsId: 'sq-demo-python-app'"
-                '''
+                withCredentials([string(credentialsId: 'sq-demo-python-app', variable: 'SQ_TOKEN')]) {
+                    echo 'Source Code Scan SonarQube'
+                    sh '''
+                        /sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
+                        -Dsonar.projectKey="${APP_NAME}" \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=https://sq.7-11.io \
+                        -Dsonar.login="$SQ_TOKEN"
+                    '''
+                }
             }
         }
 
