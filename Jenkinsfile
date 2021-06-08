@@ -7,6 +7,7 @@ pipeline {
         APP_NAME = "demo-python-app"
         APP_PORT = "5000"
         DEV_PROJECT = "default"
+        SQ_SERVER = "https://sq.7-11.io"
         NEXUS_SERVER = "https://index.docker.io/v1/"
         DOCKER_USER = "pornpasok"
 
@@ -45,7 +46,7 @@ pipeline {
                         /sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
                         -Dsonar.projectKey="${APP_NAME}" \
                         -Dsonar.sources=. \
-                        -Dsonar.host.url=https://sq.7-11.io \
+                        -Dsonar.host.url="${SQ_SERVER}" \
                         -Dsonar.login="$SQ_TOKEN"
                     '''
                 }
