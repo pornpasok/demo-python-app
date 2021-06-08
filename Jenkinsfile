@@ -45,7 +45,7 @@ pipeline {
                     -Dsonar.projectKey="${APP_NAME}" \
                     -Dsonar.sources=. \
                     -Dsonar.host.url=https://sq.7-11.io \
-                    -Dsonar.login="credentialsId: 'github-cicd'"
+                    -Dsonar.login="credentialsId: 'sq-demo-python-app'"
                 '''
             }
         }
