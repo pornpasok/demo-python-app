@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         APP_GIT_URL = "https://github.com/pornpasok/demo-python-app.git"
+        APP_BRANCH = "main"
         APP_TAG = "latest"
         APP_NAME = "demo-python-app"
         APP_PORT = "5000"
@@ -31,7 +32,7 @@ pipeline {
                 git(
                     url: "${APP_GIT_URL}",
                     //credentialsId: 'github-cicd',
-                    branch: "main"
+                    branch: "${APP_BRANCH}"
                 )
             }
         }
