@@ -178,7 +178,7 @@ EOF
                     #STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://$ELB_ENDPOINT)
 
                     # Service
-                    STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://${APP_NAME}).${DEV_PROJECT}.svc.cluster.local
+                    STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://${APP_NAME}.${DEV_PROJECT}.svc.cluster.local)
                     if test $STATUSCODE -ne 200; then echo ERROR:$STATUSCODE && exit 1; else echo SUCCESS; fi;
                 '''
             }
