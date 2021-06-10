@@ -126,7 +126,7 @@ pipeline {
                 echo 'Create Ingress to Service'
                 sh '''
                     cat <<EOF | kubectl apply -f -
-apiVersion: networking.k8s.io/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: ${APP_NAME}
