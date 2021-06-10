@@ -111,7 +111,37 @@ pipeline {
             steps {
                 echo 'Expose Service to Dev ENV'
                 sh '''
-                    kubectl expose deployment ${APP_NAME} -n ${DEV_PROJECT} --type=LoadBalancer --port=80 --target-port=${APP_PORT}
+                    # ELB 
+                    #kubectl expose deployment ${APP_NAME} -n ${DEV_PROJECT} --type=LoadBalancer --port=80 --target-port=${APP_PORT}
+
+                    # Default Service
+                    kubectl expose deployment ${APP_NAME} -n ${DEV_PROJECT} --port=80 --target-port=${APP_PORT}
+                '''
+
+            }
+        }
+
+        stage('Create Ingress to Service') {
+            steps {
+                echo 'Create Ingress to Service'
+                sh '''
+                    cat <<EOF | kubectl apply -f -
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ${APP_NAME}
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: ${APP_NAME}.7-11.io
+      http:
+        paths:
+          - backend:
+              serviceName: ${APP_NAME}
+              servicePort: 80
+EOF
                 '''
 
             }
