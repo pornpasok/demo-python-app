@@ -174,11 +174,11 @@ EOF
                 sh '''
                     sleep 60
                     # ELB
-                    ELB_ENDPOINT=$(kubectl get service ${APP_NAME} -n ${DEV_PROJECT} | tail -n +2 | awk '{print $4}')
-                    STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://$ELB_ENDPOINT)
+                    #ELB_ENDPOINT=$(kubectl get service ${APP_NAME} -n ${DEV_PROJECT} | tail -n +2 | awk '{print $4}')
+                    #STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://$ELB_ENDPOINT)
 
                     # Service
-                    #STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://${APP_NAME})
+                    STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://${APP_NAME})
                     if test $STATUSCODE -ne 200; then echo ERROR:$STATUSCODE && exit 1; else echo SUCCESS; fi;
                 '''
             }
