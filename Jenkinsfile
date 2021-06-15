@@ -40,7 +40,7 @@ pipeline {
 
         stage('Source Code Scan SonarQube') {
             steps {
-                withCredentials([string(credentialsId: 'sq-demo-python-app', variable: 'SQ_TOKEN')]) {
+                withCredentials([string(credentialsId: 'sq-token', variable: 'SQ_TOKEN')]) {
                     echo 'Source Code Scan SonarQube'
                     sh '''
                         /sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
