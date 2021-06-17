@@ -135,7 +135,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-    - host: ${APP_NAME}.7-11.io
+    - host: ${APP_NAME}.farmhug.me
       http:
         paths:
           - backend:
@@ -178,7 +178,8 @@ EOF
                     #STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://$ELB_ENDPOINT)
 
                     # Service
-                    STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://${APP_NAME}.${DEV_PROJECT}.svc.cluster.local)
+                    #STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://${APP_NAME}.${DEV_PROJECT}.svc.cluster.local)
+                    STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://${APP_NAME}.farmhug.me)
                     if test $STATUSCODE -ne 200; then echo ERROR:$STATUSCODE && exit 1; else echo SUCCESS; fi;
                 '''
             }
