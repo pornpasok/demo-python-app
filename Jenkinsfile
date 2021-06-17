@@ -57,8 +57,8 @@ pipeline {
             steps {
                 echo 'Build Docker Images'
                 sh '''
-                    #docker build -t ${DOCKER_USER}/${APP_NAME} .
-                    docker build -t ${DOCKER_USER}/${APP_NAME} --network container:\$(docker ps | grep \$(hostname) | grep k8s_POD | cut -d\" \" -f1) .
+                    docker build -t ${DOCKER_USER}/${APP_NAME} .
+                    #docker build -t ${DOCKER_USER}/${APP_NAME} --network container:\$(docker ps | grep \$(hostname) | grep k8s_POD | cut -d\" \" -f1) .
                 '''
             }
         }
